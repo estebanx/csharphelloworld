@@ -23,6 +23,8 @@ sum=1
 for i in %${arr[@]}%
 do
      docker stop $(docker ps -q --filter ancestor=$i:$4)
+     docker rm $(docker ps -q --filter ancestor=$i:$4)
+     docker rmi $i:$4
      docker pull $i:$4
      docker run -d -p ${arrport[$index]}:80 $i:$4
     ((index += sum))
